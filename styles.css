@@ -45,6 +45,7 @@ h1 {
   /* align-items: center; */
   gap: 15px;
   padding: 28px;
+  justify-content: space-between;
 }
 
 .product:hover {
@@ -148,4 +149,25 @@ button:hover {
   display: flex;
   flex-direction: row;
   gap: 6px;
+}
+
+.productImage {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  overflow: hidden;
+}
+
+.productImage img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  margin: auto;
+}
+
+.productHead {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
