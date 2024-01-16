@@ -16,9 +16,21 @@
   </head>
   <body>
     <div class="main-container">
-      <h1>Find what you need</h1>
-      <div class="products">
-        <div class="product">
+      <div class="main-navigation">
+        <h1>Find what you need</h1>
+        <div class="filter-search">
+          <input type="text" placeholder="Search" />
+          <select name="sort" id="sort">
+            <option value="none">Sort by</option>
+            <option value="price-low">Price: Low - High</option>
+            <option value="price-high">Price: High - Low</option>
+            <option value="name-A">Name: A - Z</option>
+            <option value="name-Z">Name: Z - A</option>
+          </select>
+        </div>
+      </div>
+      <div class="products" id="products-container">
+        <!-- <div class="product">
           <img src="/challenge1/media/ImagePolo.png" alt="green Polo t-shirt" />
           <h3>Polo Ralph Lauren</h3>
           <p>Impeccably tailored in Italy from lightweight navy wool.</p>
@@ -118,8 +130,13 @@
               title="add to Favorites"
             />
           </div>
-        </div>
+        </div> -->
       </div>
+      <button id="load-btn">Load more</button>
     </div>
+    <script type="module">
+      import axios from "https://cdn.skypack.dev/axios";
+    </script>
+    <script type="module" src="./script.js"></script>
   </body>
 </html>

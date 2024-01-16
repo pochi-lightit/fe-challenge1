@@ -1,0 +1,20 @@
+{
+  "name": "fe-challenge1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pochi-lightit/fe-challenge1.git"
+  },
+  "author": "Flor Pocetti",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pochi-lightit/fe-challenge1/issues"
+  },
+  "homepage": "https://github.com/pochi-lightit/fe-challenge1#readme",
+  "type": "module",
+  "scripts": {
+    "start": "node script.js"
+  }
+}

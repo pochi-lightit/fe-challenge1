@@ -18,7 +18,7 @@ body {
 
 @media (min-width: 1031px) {
   .main-container {
-      text-align: left;
+    text-align: left;
   }
 }
 
@@ -26,7 +26,7 @@ h1 {
   font-size: 38px;
   margin: 0;
   padding: 0;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
   font-weight: 500;
 }
 
@@ -57,7 +57,7 @@ h1 {
   color: #757a88;
   margin: 0;
   padding: 0;
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
   font-size: 14px;
   font-weight: 400;
 }
@@ -66,7 +66,7 @@ h1 {
   margin: 0;
   padding: 0;
   text-align: center;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
   font-weight: 500;
   font-size: 22px;
 }
@@ -86,4 +86,66 @@ h1 {
 
 .heartIcon:hover {
   cursor: pointer;
+}
+
+.main-navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.main-navigation select {
+  border-color: #dee0e7;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  padding: 6px;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  color: #d1d3da;
+}
+
+.main-navigation input {
+  border-color: #dee0e7;
+  border-style: solid;
+  border-width: 1px;
+  height: 40px;
+  border-radius: 5px;
+  width: 275px;
+}
+
+.main-navigation input::placeholder {
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  color: #d1d3da;
+  padding: 6px;
+}
+
+button {
+  width: 130px;
+  align-self: center;
+  height: 45px;
+  padding: 6px;
+  border-style: none;
+  background-color: #ea580c;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+  border-radius: 40px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: white;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #ea580c;
+  color: #ea580c;
+}
+
+.filter-search {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
 }
