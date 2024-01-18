@@ -1,14 +1,16 @@
 /* 
-- Indicar en qué HTML se cargan los elementos de la URL
-- Cargar los primeros 6 elementos
-- Indicar la interacción con el Load more button
-- Paginado (número de página e items por página)
-
+- ✅ Indicar en qué HTML se cargan los elementos de la URL
+- ✅ Cargar los primeros 6 elementos
+- ✅ Indicar la interacción con el Load more button
+- ✅ Paginado (número de página e items por página)
+-   Search
+-   Order by
  */
 
 import axios from "https://cdn.skypack.dev/axios";
 
 let productsArray;
+let productsSorted;
 let currentPage = 0;
 let itemsPerPage = 6;
 let productsURL = "https://dummyjson.com/products";
@@ -24,35 +26,46 @@ const getAllProducts = async () => {
   } catch {
     console.error(error);
   }
-
   getInitialProducts(productsArray);
   return productsArray;
 };
 
-const getInitialProducts = (productsArray) => {
-  console.log(productsArray);
+//Cargo los primeros 6 elementos
+const getInitialProducts = (products) => {
+  console.log(
+    "Este es el listado de productos que recibe getInitialProducts ",
+    products
+  );
 
   for (let i = 0; i < itemsPerPage; i++) {
-    const productCard = createProductCard(productsArray[i]);
+    const productCard = createProductCard(products[i]);
     productCardContainer.appendChild(productCard);
     // console.log("check ", i);
   }
   return ++currentPage;
 };
 
-//me traigo más productos de la url
-const getProducts = (productsArray) => {
-  console.log("This is the current page ", currentPage);
+//me traigo más productos de la url, chequeo si hay un sort aplicado
+const getProducts = () => {
   let initialProduct = currentPage * itemsPerPage;
-  console.log(initialProduct);
   let finalProduct = itemsPerPage * (currentPage + 1);
-  console.log(finalProduct);
-
+  let productCard;
+  console.log("These are the productsSorted ", productsSorted);
   //inserto un nuevo set de cards por cada click al boton
 
-  for (let i = initialProduct; i < finalProduct; i++) {
-    const productCard = createProductCard(productsArray[i]);
-    productCardContainer.appendChild(productCard);
+  //si están ordenados, recorro la lista ordenada
+  if (productsSorted !== undefined) {
+    for (let i = initialProduct; i < finalProduct; i++) {
+      console.log("entró en products sorted");
+      productCard = createProductCard(productsSorted[i]);
+      productCardContainer.appendChild(productCard);
+    }
+  } else {
+    for (let i = initialProduct; i < finalProduct; i++) {
+      console.log("entró en products NOT sorted");
+      productCard = createProductCard(productsArray[i]);
+      productCardContainer.appendChild(productCard);
+    }
   }
   return ++currentPage;
 };
@@ -84,7 +97,47 @@ const createProductCard = (product) => {
   return productCard;
 };
 
-const loadButton = document.getElementById("load-btn");
-loadButton.addEventListener("click", () => getProducts(productsArray));
+//Sorting
+const sortBy = () => {
+  console.log("this is sort by ", sortOption.value);
 
+  productsSorted = [...productsArray];
+
+  if (sortOption.value === "none") {
+    productsSorted = productsArray;
+  }
+
+  if (sortOption.value === "price-low") {
+    productsSorted = productsArray.sort((a, b) => a.price - b.price);
+  }
+
+  if (sortOption.value === "price-high") {
+    productsSorted = productsArray.sort((a, b) => b.price - a.price);
+  }
+
+  if (sortOption.value === "name-A") {
+    productsSorted = productsArray.sort((a, b) =>
+      a.title.localeCompare(b.title)
+    );
+  }
+
+  if (sortOption.value === "name-Z") {
+    productsSorted = productsArray.sort((a, b) =>
+      b.title.localeCompare(a.title)
+    );
+  }
+
+  productCardContainer.innerHTML = "";
+  getInitialProducts(productsSorted);
+  return productsSorted;
+};
 document.addEventListener("DOMContentLoaded", getAllProducts());
+
+const loadButton = document.getElementById("load-btn");
+loadButton.addEventListener("click", () => getProducts());
+
+const sortOption = document.getElementById("sort");
+sortOption.addEventListener("change", sortBy);
+
+// localStorage.setItem("allProducts", JSON.stringify(productsArray));
+// console.log(localStorage);
