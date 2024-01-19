@@ -3,8 +3,10 @@
 - ✅ Cargar los primeros 6 elementos
 - ✅ Indicar la interacción con el Load more button
 - ✅ Paginado (número de página e items por página)
--   Search
--   Order by
+- ✅ Search
+ - Aplicar el orderby al search result
+- ✅ Order by
+- Favorites
  */
 
 import axios from "https://cdn.skypack.dev/axios";
@@ -30,12 +32,9 @@ const getAllProducts = async () => {
   return productsArray;
 };
 
-//Cargo los primeros 6 elementos
+//Cargo los primeros 6 elementos desordenados
 const getInitialProducts = (products) => {
-  console.log(
-    "Este es el listado de productos que recibe getInitialProducts ",
-    products
-  );
+  currentPage = 0;
 
   for (let i = 0; i < itemsPerPage; i++) {
     const productCard = createProductCard(products[i]);
@@ -73,6 +72,11 @@ const getProducts = () => {
 //Recreo la card con cada producto que me traigo de la url
 const createProductCard = (product) => {
   const productCard = document.createElement("div");
+
+  function toggleFavorite(id) {
+    console.log("this is the id ", id);
+  }
+
   productCard.classList.add("product");
   productCard.innerHTML = `
   <div class='productHead'>
@@ -86,12 +90,22 @@ const createProductCard = (product) => {
       <p>
         € <a>${product.price}</a>
       </p>
+      <button class="favorite">
       <img
         class="heartIcon"
-        src="/challenge1/media/Icons/Heart.svg"
+        src="./media/Icons/Heart.svg"
         alt="heart icon"
         title="add to Favorites"
+        onclick="toggleFavorite(${product.id})"
       />
+      <img
+        class="heartIcon"
+        src="./media/Icons/Heart-full.svg"
+        alt="added to Favorites"
+        title="remove from Favorites"
+        hidden
+      />
+      </button>
     </div>`;
 
   return productCard;
@@ -101,28 +115,32 @@ const createProductCard = (product) => {
 const sortBy = () => {
   console.log("this is sort by ", sortOption.value);
 
-  productsSorted = [...productsArray];
-
   if (sortOption.value === "none") {
-    productsSorted = productsArray;
+    productsSorted = undefined;
+    console.log("None: ", productsSorted);
+    productCardContainer.innerHTML = "";
+    console.log(productsArray);
+    getInitialProducts(productsArray);
+    return;
   }
 
+  productsSorted = [...productsArray];
   if (sortOption.value === "price-low") {
-    productsSorted = productsArray.sort((a, b) => a.price - b.price);
+    productsSorted = productsSorted.sort((a, b) => a.price - b.price);
   }
 
   if (sortOption.value === "price-high") {
-    productsSorted = productsArray.sort((a, b) => b.price - a.price);
+    productsSorted = productsSorted.sort((a, b) => b.price - a.price);
   }
 
   if (sortOption.value === "name-A") {
-    productsSorted = productsArray.sort((a, b) =>
+    productsSorted = productsSorted.sort((a, b) =>
       a.title.localeCompare(b.title)
     );
   }
 
   if (sortOption.value === "name-Z") {
-    productsSorted = productsArray.sort((a, b) =>
+    productsSorted = productsSorted.sort((a, b) =>
       b.title.localeCompare(a.title)
     );
   }
@@ -133,11 +151,57 @@ const sortBy = () => {
 };
 document.addEventListener("DOMContentLoaded", getAllProducts());
 
+// Favorites
+let favoriteProducts = JSON.parse(localStorage.getItem("favorites")) || [];
+console.log(favoriteProducts);
+
+favoriteProducts.forEach((favorite) => {
+  document.getElementById(favorite).className = "favorite";
+});
+
+const handleFavorite = (productId) => {};
+// const addFavorite = (product) => {
+//   console.log(product);
+//   favoriteProducts.push(product);
+//   localStorage.setItem("favorites", favoriteProducts);
+//   console.log(
+//     "This is the local storage ",
+//     localStorage,
+//     "and this the favorties array ",
+//     favoriteProducts
+//   );
+// };
+
+//Search
+const handleSearch = (searchInput) => {
+  let filteredProducts = [...productsArray];
+
+  filteredProducts = filteredProducts.filter((product) => {
+    return product.title.toLowerCase().includes(searchInput.toLowerCase());
+  });
+
+  productCardContainer.innerHTML = "";
+  getInitialProducts(filteredProducts);
+  return filteredProducts;
+};
+
+//!Event listeners
+//Search & Input
+const searchBar = document.getElementById("searchBar");
+searchBar.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const searchInput = document.querySelector("#searchBar input").value;
+  handleSearch(searchInput);
+});
+
+//Load more
 const loadButton = document.getElementById("load-btn");
 loadButton.addEventListener("click", () => getProducts());
 
+//Sorting
 const sortOption = document.getElementById("sort");
 sortOption.addEventListener("change", sortBy);
 
-// localStorage.setItem("allProducts", JSON.stringify(productsArray));
-// console.log(localStorage);
+//Favorites
+
+//!Buscar un approach con onClick > me permite acceder a los atributos

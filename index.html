@@ -19,7 +19,15 @@
       <div class="main-navigation">
         <h1>Find what you need</h1>
         <div class="filter-search">
-          <input type="text" placeholder="Search" />
+          <div class="searchbar">
+            <form action="#" id="searchBar">
+              <input type="text" placeholder="Search..." />
+            </form>
+            <button type="submit" form="searchBar" id="searchbtn">
+              <img src="./media/Icons/Magnifer.svg" alt="search icon" />
+            </button>
+          </div>
+
           <select name="sort" id="sort">
             <option value="none">Sort by</option>
             <option value="price-low">Price: Low - High</option>
@@ -29,109 +37,8 @@
           </select>
         </div>
       </div>
-      <div class="products" id="products-container">
-        <!-- <div class="product">
-          <img src="/challenge1/media/ImagePolo.png" alt="green Polo t-shirt" />
-          <h3>Polo Ralph Lauren</h3>
-          <p>Impeccably tailored in Italy from lightweight navy wool.</p>
-          <div class="price">
-            <p>€ 300</p>
-            <img
-              class="heartIcon"
-              src="/challenge1/media/Icons/Heart.svg"
-              alt="heart icon"
-              title="add to Favorites"
-            />
-          </div>
-        </div>
+      <div class="products" id="products-container"></div>
 
-        <div class="product">
-          <img
-            src="/challenge1/media/ ImageTom.png"
-            alt="black leather briefcase"
-          />
-          <h3>Tom Ford</h3>
-          <p>Immaculate tailoring is TOM FORD's forte.</p>
-          <div class="price">
-            <p>€ 879</p>
-            <img
-              class="heartIcon"
-              src="/challenge1/media/Icons/Heart.svg"
-              alt="heart icon"
-              title="add to Favorites"
-            />
-          </div>
-        </div>
-
-        <div class="product">
-          <img
-            src="/challenge1/media/ImageWoo.png"
-            alt="grey t-shirt with pocket"
-          />
-          <h3>Wooyoungmi</h3>
-          <p>Dark-grey slub wool, pintucked notch lapels.</p>
-          <div class="price">
-            <p>$300</p>
-            <img
-              class="heartIcon"
-              src="/challenge1/media/Icons/Heart.svg"
-              alt="heart icon"
-              title="add to Favorites"
-            />
-          </div>
-        </div>
-
-        <div class="product">
-          <img
-            src="/challenge1/media/ImageTomSweeney.png"
-            alt="wool dark grey shirt"
-          />
-          <h3>Thom Sweeney</h3>
-          <p>It's made from lightweight grey wool woven.</p>
-          <div class="price">
-            <p>€ 680</p>
-            <img
-              class="heartIcon"
-              src="/challenge1/media/Icons/Heart.svg"
-              alt="heart icon"
-              title="add to Favorites"
-            />
-          </div>
-        </div>
-
-        <div class="product">
-          <img
-            src="/challenge1/media/ImageKingman.png"
-            alt="blue navy shorts for men"
-          />
-          <h3>Kingsman</h3>
-          <p>Crafted from khaki cotton and fully canvassed.</p>
-          <div class="price">
-            <p>€ 725</p>
-            <img
-              class="heartIcon"
-              src="/challenge1/media/Icons/Heart.svg"
-              alt="heart icon"
-              title="add to Favorites"
-            />
-          </div>
-        </div>
-
-        <div class="product">
-          <img src="/challenge1/media/ImageBogli.png" alt="blue chino pants" />
-          <h3>Boglioli</h3>
-          <p>Masterfully crafted in Northern Italy.</p>
-          <div class="price">
-            <p>€ 699</p>
-            <img
-              class="heartIcon"
-              src="/challenge1/media/Icons/Heart.svg"
-              alt="heart icon"
-              title="add to Favorites"
-            />
-          </div>
-        </div> -->
-      </div>
       <button id="load-btn">Load more</button>
     </div>
     <script type="module">

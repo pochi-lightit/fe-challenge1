@@ -107,11 +107,10 @@ h1 {
 }
 
 .main-navigation input {
-  border-color: #dee0e7;
-  border-style: solid;
-  border-width: 1px;
+  border: 1px solid #dee0e7;
+  border-right: none;
   height: 40px;
-  border-radius: 5px;
+  border-radius: 5px 0 0 5px;
   width: 275px;
 }
 
@@ -122,7 +121,7 @@ h1 {
   padding: 6px;
 }
 
-button {
+#load-btn {
   width: 130px;
   align-self: center;
   height: 45px;
@@ -137,7 +136,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+#load-btn:hover {
   background-color: white;
   border-style: solid;
   border-width: 2px;
@@ -170,4 +169,21 @@ button:hover {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.favorite {
+  background-color: white;
+  border: none;
+}
+
+.searchbar {
+  display: flex;
+}
+
+.searchbar button {
+  background-color: white;
+  border: 1px solid #dee0e7;
+  border-left: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
 }
